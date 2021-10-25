@@ -1,0 +1,16 @@
+import React from "react";
+import {ScrollView} from 'react-native';
+
+
+const MainContainer = ({children}: any)=>{
+
+    return(
+        <ScrollView 
+            style={{ flex: 1, paddingHorizontal: 20, backgroundColor: '#212121'}}
+        >
+            {children}
+        </ScrollView>
+    )
+}
+
+export default MainContainer

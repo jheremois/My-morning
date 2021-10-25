@@ -1,5 +1,13 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "sounds": ["./assets/xd.wav"]
+        }
+      ]
+    ],
     "name": "my-morning",
     "slug": "my-morning",
     "version": "1.0.0",
