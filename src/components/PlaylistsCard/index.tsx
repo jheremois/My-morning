@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, FlatList } from "react-native";
+import React, { useEffect, useState, useCallback } from "react";
+import { View, Text, Image, FlatList, Pressable, Linking, Button, Alert } from "react-native";
 import styles from "./styles";
 import Card from "../Card";
-import { getCryptoValue } from "@src/services/crypto.api";
+import axios from "axios";
+import { getPlaylist } from "@src/services/spotify.api";
 
-const CryptoCard = ({navigation}: any)=>{
+const PlaylistCard = ({navigation}: any)=>{
     
     const [loading, setLoading]: any = useState(false)
-    const [cryptos, setCryptos]: any = useState([''])
     
     const sendCrytos = async ()=>{
         
         setLoading(true)
 
-        await getCryptoValue().then( async (response:any)=> {
-            setCryptos(response.data)
-        }).catch(function (error: any) {
-            console.error(error)
-        })
+        console.log(getPlaylist().items)
 
         setLoading(false)    
     
@@ -29,33 +25,32 @@ const CryptoCard = ({navigation}: any)=>{
 
     const CritoIcon = ( {item}: any )=>{
         return(
-            <View style={styles.crypCard}>
+            <Pressable style={styles.crypCard} onPress={(e)=> Linking.openURL(`https://open.spotify.com/playlist/${item.id}?si=60e4abdee8634b21`)}>
                 <View style={styles.crypCardimgCont}>
-                    <Image style={styles.crypCardimg} source={{uri: item.image}}/>
+                    <Image style={styles.crypCardimg} source={{uri: item.images[0].url}}/>
                 </View>
                 <View>
                     <Text style={styles.crypCardText}>
                         {item.name}
                     </Text>
-                    <Text style={styles.crypCardTextPrice}>
-                        ${item.current_price} 
-                    </Text>
                 </View>
-            </View>
+            </Pressable>
         )
     }
 
+    const supportedURL = ``;
+
     return(
-        <Card bg={['#282F4480', '#282F4420']} load={loading} loadbg={'#ffffff90'} icon={'cash'} action={(e: any)=> console.log(e)}>
+        <Card bg={['#18181870', '#18181890']} load={loading} loadbg={'#ffffff90'} icon={'cash'} action={(e: any)=> console.log(e)}>
             <View style={styles.cardIn}>
                 <FlatList
-                    data={cryptos}
+                    data={getPlaylist().items}
                     renderItem={CritoIcon}
                     snapToAlignment={'start'}
                     decelerationRate={'fast'}
                     snapToInterval={(130 + 10) * 2}
                     horizontal={true}
-                    keyExtractor={item => item.id + '/' +item.ath}
+                    keyExtractor={item => item.id}
                     showsHorizontalScrollIndicator={false}
                     centerContent={true}
                     fadingEdgeLength={30}
@@ -68,4 +63,4 @@ const CryptoCard = ({navigation}: any)=>{
 
 }
 
-export default CryptoCard
+export default PlaylistCard

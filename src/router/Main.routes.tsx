@@ -33,7 +33,7 @@ function MainRoutes() {
               tabBarBackground: (()=> <View style={{height: 90, padding: 20,}}></View>),
             }}
           >
-              <Tap.Screen name="My day" component={MyDayRoutes} options={setIcons(0)} />
+              <Tap.Screen name="Myday" component={MyDayRoutes} options={setIcons(0)} />
               <Tap.Screen name="Tasks" component={Tasks} options={setIcons(1)} />
           </Tap.Navigator>
       </NavigationContainer>
