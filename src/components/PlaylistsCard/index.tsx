@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, FlatList, Pressable, Linking } from "react-native";
 import styles from "./styles";
 import Card from "../Card";
-import { getAllPlaylists } from "@src/services/spotify.api";
+import { getAllPlaylists } from "@src/services/playlists.api";
 
 const PlaylistCard = ()=>{
     
