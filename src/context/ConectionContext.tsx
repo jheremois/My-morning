@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState, createContext } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import NetInfo from "@react-native-community/netinfo";
 
 let contextValue: any = {
