@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { View, Text, Image, FlatList, Pressable, Linking, Button, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Image, FlatList, Pressable, Linking } from "react-native";
 import styles from "./styles";
 import Card from "../Card";
-import axios from "axios";
-import { getPlaylist, getAllPlaylists } from "@src/services/spotify.api";
+import { getAllPlaylists } from "@src/services/spotify.api";
 
-const PlaylistCard = ({navigation}: any)=>{
+const PlaylistCard = ()=>{
     
-    const [loading, setLoading]: any = useState(false)
     const [playls, setPlayls]: any = useState([''])
+    const [loading, setLoading]: any = useState(false)
     
     const sendCrytos = async ()=>{
         
@@ -32,12 +31,12 @@ const PlaylistCard = ({navigation}: any)=>{
     
     const playlistItem = ( {item}: any )=>{
         return(
-            <Pressable style={styles.crypCard} onPress={(e)=> Linking.openURL(`https://open.spotify.com/playlist/${item.id}?si=60e4abdee8634b21`)}>
-                <View style={styles.crypCardimgCont}>
-                    <Image style={styles.crypCardimg} source={{uri: item.images}}/>
+            <Pressable style={styles.plCard} onPress={(e)=> Linking.openURL(`https://open.spotify.com/playlist/${item.id}?si=60e4abdee8634b21`)}>
+                <View style={styles.plCardimgCont}>
+                    <Image style={styles.plCardimg} source={{uri: item.images}}/>
                 </View>
                 <View>
-                    <Text style={styles.crypCardText}>
+                    <Text style={styles.plCardText}>
                         {item.name}
                     </Text>
                 </View>

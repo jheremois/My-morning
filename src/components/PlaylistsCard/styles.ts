@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    crypCard: {
+    plCard: {
         borderRadius: 2,
         padding: 10,
         height: 215,
@@ -17,25 +17,20 @@ const styles = StyleSheet.create({
         margin: 5,
         marginHorizontal: 10,
     },
-    crypCardimgCont: {
+    plCardimgCont: {
         paddingBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    crypCardimg: {
+    plCardimg: {
         height: 140,
         width: 140,
     },
-    crypCardText: {
+    plCardText: {
         overflow: 'scroll',
         paddingHorizontal: 10,
         fontWeight: 'bold',
         color: '#fdfdfc',
-    },
-    crypCardTextPrice: {
-        marginTop: 3,
-        textAlign: 'center',
-        color: '#fcd535',
     }
     
 });

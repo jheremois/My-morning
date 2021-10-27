@@ -4,7 +4,7 @@ import styles from "./styles";
 import Card from "../Card";
 import { getCryptoValue } from "@src/services/crypto.api";
 
-const CryptoCard = ({navigation}: any)=>{
+const CryptoCard = ()=>{
     
     const [loading, setLoading]: any = useState(false)
     const [cryptos, setCryptos]: any = useState([])
