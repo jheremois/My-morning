@@ -7,7 +7,7 @@ import { getCryptoValue } from "@src/services/crypto.api";
 const CryptoCard = ({navigation}: any)=>{
     
     const [loading, setLoading]: any = useState(false)
-    const [cryptos, setCryptos]: any = useState([''])
+    const [cryptos, setCryptos]: any = useState([])
     
     const sendCrytos = async ()=>{
         

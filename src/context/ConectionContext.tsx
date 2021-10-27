@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState, createContext } from "react";
 import NetInfo from "@react-native-community/netinfo";
 
-NetInfo.fetch().then(state => {
-  console.log("Connection type", state.type);
-  console.log("Is connected?", state.isConnected);
-})
-
 let contextValue: any = {
   isConected: true,
 }

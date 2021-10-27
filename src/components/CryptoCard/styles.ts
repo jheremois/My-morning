@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     crypCard: {
-        height: 160,
+        height: 190,
         width: 130,
         padding: 20,
         backgroundColor: '#181a20',
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     },
     crypCardimg: {
         borderRadius: 90,
-        height: 50,
-        width: 50,
+        height: 80,
+        width: 80,
     },
     crypCardText: {
         fontWeight: 'bold',
