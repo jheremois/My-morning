@@ -1,43 +1,67 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, FlatList, Pressable, ActivityIndicator, Dimensions } from "react-native";
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import CheckBox from '@react-native-community/checkbox';
 import ConectionVer from "@src/components/ConectionVer";
-import { getPenddingTasks } from "@src/services/tasks.api";
+import { getPenddingTasks, putDoneTasks } from "@src/services/tasks.api";
+import styles from "./styles";
+import FloatButon from "@src/components/FloatBut";
+import { format, render, cancel, register } from 'timeago.js';
 
 export function PenddingTasks({navigation}: any) {
     const [tasks, setTasks]: any = useState([''])
+    const [load, setLoad] = useState(false)
     const [loading, setLoading]: any = useState(false)
 
     const sendTasks = async ()=>{
         
         setLoading(true)
 
-        await getPenddingTasks().then((res)=>{
-            setTasks(res.data)
-        }).catch((err)=>{
+        await getPenddingTasks().then(async (res)=>{
+            await setTasks(res.data)
+        }).then(setLoading(false)).catch((err)=>{
             console.log(err)
         })
-
-        await setLoading(false)  
+ 
     }   
 
     useEffect(()=>{        
         sendTasks()
-    }, [])
+    }, [tasks])
 
     
     const taskIntem = ( {item}: any )=>{
+
         return(
-            <View style={{backgroundColor: '#51515180', width: Dimensions.get('window').width - 40, borderRadius: 10, marginVertical: 10, paddingHorizontal: 20, paddingVertical: 5, minHeight: 110,}}>
-                <Pressable>
-                    <Text style={{color: '#f0f0f0'}}>
-                        ...
-                    </Text>
-                </Pressable>
-                <View style={{paddingVertical: 10,}}>
-                    <Text style={{color: '#f0f0f0',}}>
-                        {item.task}
-                    </Text>
-                </View>
+
+            <View style={styles.task}>
+                {load
+                    ?
+                        <ActivityIndicator size="large" color={'#f0f0f0'}/>
+                    :
+                        <View>
+                            <View style={{paddingVertical: 10, minHeight: 60,}}>
+                                <Text style={{color: '#f0f0f0',}}>
+                                    {item.task}
+                                </Text>
+                            </View>
+                            <View style={styles.taksActions}>
+                                <Text style={styles.taksActionsText}>
+                                    {format(item.upload_date)}
+                                </Text>
+                                <CheckBox
+                                value={item.taskDone}
+                                onValueChange={()=> setTimeout(() => {
+                                    setLoad(true)
+                                    putDoneTasks(item.id).then(
+                                        async ()=> await setLoad(false)
+                                    )
+                                }, 900)}
+                                tintColors={{ true: '#f0f0f0', false: '#f0f0f070' }}
+                                style={{}}
+                                />
+                            </View>
+                        </View>
+                }
             </View>
         )
     }
@@ -45,36 +69,24 @@ export function PenddingTasks({navigation}: any) {
     return(
         loading
             ?
-            <View style={{ paddingHorizontal: 20, flex: 1, height: '100%', width: '100%', backgroundColor: '#212121', justifyContent: 'center', alignItems: 'center', paddingBottom: 55}}>
+            <View style={styles.container}>
                 <ActivityIndicator size="large" color={'#f0f0f0'}/>
             </View>
             :
-            <View style={{ paddingHorizontal: 20, flex: 1, height: '100%', width: '100%', backgroundColor: '#212121', justifyContent: 'center', alignItems: 'center', paddingBottom: 55}}>
+            <View style={styles.container}>
                 <ConectionVer/>
                 <View>
                     <FlatList
-                        ListHeaderComponent={
-                            <View style={{backgroundColor: '#212121', width: '100%', flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15 }}>
-                                <Text style={{color: '#f0f0f0', fontWeight: 'bold', fontSize: 24, paddingVertical: 10, textAlign: 'center', }}>
-                                    Pendding Tasks
-                                </Text>
-                                <Pressable onPress={() => navigation.navigate('done')}>
-                                    <Text style={{color: '#f0f0f080', fontWeight: 'bold', fontSize: 24, paddingVertical: 10, textAlign: 'center'}}>
-                                        Done Tasks
-                                    </Text>
-                                </Pressable>
-                            </View>
-                        }
-                        stickyHeaderIndices={[0]}
                         data={tasks}
                         showsVerticalScrollIndicator={false}
                         renderItem={taskIntem}
                         keyExtractor={item => item.id + '/task'}
                         showsHorizontalScrollIndicator={false}
                         centerContent={true}
-                        fadingEdgeLength={30}
+                        fadingEdgeLength={15}
                         refreshing={true}
                     ></FlatList>    
+                    <FloatButon/>
                 </View>
             </View>
     )

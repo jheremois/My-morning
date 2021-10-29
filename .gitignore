@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 src/config
+thunder-tests
 
 # macOS
 .DS_Store

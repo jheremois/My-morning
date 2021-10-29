@@ -17,6 +17,7 @@ const setIcons = (iconsPost: number) => {
 };
 
 const Tap = createBottomTabNavigator()
+
 function MainRoutes() {
     return (
       <NavigationContainer>

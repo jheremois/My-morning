@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API_IP } from "@src/config/env";
 
 const options: any = {
     method: 'GET',
-    url: 'http://192.168.1.27:3000/api/playlists',
+    url: `${API_IP}/api/playlists`,
 }
 
 export const getAllPlaylists = ()=>{

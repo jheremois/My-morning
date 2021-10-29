@@ -14,7 +14,7 @@ const PlaylistCard = ()=>{
         setLoading(true)
 
         await getAllPlaylists().then( async (response:any)=> {
-            setPlayls(response.data)
+            setPlayls(response.data.sort((a: any, b: any) => (a.id > b.id) ? -1 : ((b.id > a.id) ? +1 : 0)))
         }).catch(function (error: any) {
             console.error(error)
         })
@@ -47,7 +47,7 @@ const PlaylistCard = ()=>{
         <Card bg={['#18181870', '#18181890']} load={loading} loadbg={'#ffffff90'} icon={'play'} action={ ()=> Linking.openURL(`https://open.spotify.com?si=60e4abdee8634b21`) }>
             <View style={styles.cardIn}>
                 <FlatList
-                    data={playls}
+                    data={ playls }
                     renderItem={playlistItem}
                     snapToAlignment={'start'}
                     decelerationRate={'fast'}
