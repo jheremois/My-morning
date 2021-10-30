@@ -44,7 +44,7 @@ export function DoneTasks() {
                                 </Text>
                             </View>
                             <View style={styles.taksActions}>
-                                <Pressable onPress={
+                                <Pressable style={{padding: 5,}} onPress={
                                     async ()=> {
                                         setLoad(true)
                                         putDoneTasks(item.id).then(
@@ -54,7 +54,7 @@ export function DoneTasks() {
                                 }>
                                     <Ionicons name="arrow-undo" size={22} color="#f0f0f070" />
                                 </Pressable>
-                                <Pressable onPress={
+                                <Pressable style={{padding: 5,}} onPress={
                                     async ()=> {
                                         setLoad(true)
                                         deleteTasks(item.id).then(

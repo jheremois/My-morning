@@ -1,2 +1,2 @@
 # My-morning
-App personal, todo lo que necesito en las mañanas (En desarrollo)
+Personal app, everything I need in the morning

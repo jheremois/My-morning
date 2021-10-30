@@ -28,3 +28,14 @@ export const deleteTasks = (id: any)=>{
         url: `${API_IP}/api/task/${id}}`,
     })
 }
+
+export const CreateTask = (data: string)=>{
+    return axios.request({
+        method: 'POST',
+        url: `${API_IP}/api/task`,
+        data:{
+            task: data
+        }
+    })
+}
+  

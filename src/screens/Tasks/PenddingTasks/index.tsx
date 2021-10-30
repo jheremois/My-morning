@@ -1,16 +1,25 @@
-import React, {useState, useEffect} from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import React, {useState, useEffect, Dispatch, SetStateAction} from "react";
+import { View, Text, FlatList, ActivityIndicator, Dimensions } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 import ConectionVer from "@src/components/ConectionVer";
 import { getPenddingTasks, putDoneTasks } from "@src/services/tasks.api";
 import styles from "./styles";
-import FloatButon from "@src/components/FloatBut";
-import { format, render, cancel, register } from 'timeago.js';
+import { format } from 'timeago.js';
+import TaskAdder from "@src/components/TasksAdder";
+import { CreateTask } from "@src/services/tasks.api";
 
-export function PenddingTasks({navigation}: any) {
-    const [tasks, setTasks]: any = useState([''])
-    const [load, setLoad] = useState(false)
-    const [loading, setLoading]: any = useState(false)
+export function PenddingTasks() {
+    const [tasks, setTasks]: [any, Dispatch<SetStateAction<any>>] = useState([''])
+    const [task, setTask] = useState<string>('')
+    const [load, setLoad]= useState<boolean>(false)
+    const [loading, setLoading]: any  = useState<boolean>(false)
+
+
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+      setModalVisible(!isModalVisible);
+    };
 
     const sendTasks = async ()=>{
         
@@ -38,7 +47,7 @@ export function PenddingTasks({navigation}: any) {
                     ?
                         <ActivityIndicator size="large" color={'#f0f0f0'}/>
                     :
-                        <View>
+                        <View style={{zIndex: 999}}>
                             <View style={{paddingVertical: 10, minHeight: 60,}}>
                                 <Text style={{color: '#f0f0f0',}}>
                                     {item.task}
@@ -66,6 +75,16 @@ export function PenddingTasks({navigation}: any) {
         )
     }
 
+    
+    const postTask = ()=>{
+        CreateTask(task).then(()=>{
+            setTask('')
+            setModalVisible(!isModalVisible);
+        }).catch((err)=>{
+            console.log(err)
+        })
+    } 
+
     return(
         loading
             ?
@@ -73,11 +92,11 @@ export function PenddingTasks({navigation}: any) {
                 <ActivityIndicator size="large" color={'#f0f0f0'}/>
             </View>
             :
-            <View style={styles.container}>
+            <View style={[styles.container]}>
                 <ConectionVer/>
-                <View>
+                <View style={{minHeight: Dimensions.get('screen').height - 150, width: '100%',}}>
                     <FlatList
-                        data={tasks}
+                        data={tasks.sort((a: any, b: any) => (a.id > b.id) ? -1 : ((b.id > a.id) ? +1 : 0))}
                         showsVerticalScrollIndicator={false}
                         renderItem={taskIntem}
                         keyExtractor={item => item.id + '/task'}
@@ -85,9 +104,10 @@ export function PenddingTasks({navigation}: any) {
                         centerContent={true}
                         fadingEdgeLength={15}
                         refreshing={true}
-                    ></FlatList>    
-                    <FloatButon/>
+                    ></FlatList>
+                    <TaskAdder postTask={()=> postTask()} modalState={isModalVisible} modalToggle={()=> toggleModal()} taskData={task} taskSetter={setTask}/>
                 </View>
+                
             </View>
     )
 

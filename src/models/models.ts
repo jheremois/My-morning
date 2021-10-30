@@ -13,4 +13,10 @@ export const monthName = [
     'December'
 ]
 
+/* export interface taskState {
+    tasks: string[],
+    setTasks: any
+    [string[], Dispatch<SetStateAction<string[]>>]
+}  */
+
 export const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
