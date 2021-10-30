@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         marginVertical: 15,
         shadowColor: "#000",
         elevation: 6,
-        minHeight: 130,
+        minHeight: 170,
         justifyContent: 'center',
         backgroundColor: '#515151',
         width: '100%',

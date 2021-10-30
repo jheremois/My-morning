@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, FlatList, Dimensions } from "react-native";
+import { View, Text, Image, FlatList, Linking } from "react-native";
 import styles from "./styles";
 import Card from "../Card";
 import { getCryptoValue } from "@src/services/crypto.api";
 
-const CryptoCard = ({navigation}: any)=>{
+const CryptoCard = ()=>{
     
     const [loading, setLoading]: any = useState(false)
-    const [cryptos, setCryptos]: any = useState([''])
+    const [cryptos, setCryptos]: any = useState([])
     
     const sendCrytos = async ()=>{
         
@@ -19,7 +19,7 @@ const CryptoCard = ({navigation}: any)=>{
             console.error(error)
         })
 
-        setLoading(false)    
+        await setLoading(false)    
     
     }            
 
@@ -46,7 +46,7 @@ const CryptoCard = ({navigation}: any)=>{
     }
 
     return(
-        <Card bg={['#282F4480', '#282F4420']} load={loading} loadbg={'#ffffff90'} icon={'cash'} action={(e: any)=> console.log(e)}>
+        <Card bg={['#282F4480', '#282F4420']} load={loading} loadbg={'#ffffff90'} icon={'cash'} action={ ()=> Linking.openURL(`https://www.binance.com`) }>
             <View style={styles.cardIn}>
                 <FlatList
                     data={cryptos}

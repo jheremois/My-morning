@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Linking } from "react-native";
 import styles from "./styles";
 import Card from "../Card";
 import { getWeather } from "@src/services/weather.api";
@@ -35,7 +35,7 @@ const WeatherCard = ({navigation}: any)=>{
     }, [])
 
     return(
-        <Card bg={['#364F6B90', '#3FC1C980']} load={loading} loadbg={'#ffffff90'} icon={'cloud'} action={(e: any)=> console.log(e)}>
+        <Card bg={['#364F6B90', '#3FC1C980']} load={loading} loadbg={'#ffffff90'} icon={'cloud'} action={()=> Linking.openURL(`https://bit.ly/3pGy0Vy`)}>
             <View style={styles.cardIn}>
                 <View style={styles.city}>
                     <View style={styles.myCity}>

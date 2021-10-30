@@ -3,6 +3,7 @@ import WeatherCard from "../../../components/WheterCard";
 import TimeCard from "@src/components/TimeCard";
 import MainContainer from "@src/components/MainContainer";
 import CriptoCard from "@src/components/CryptoCard";
+import PlaylistCard from "@src/components/PlaylistsCard";
 
 const Home = ()=>{
 
@@ -11,6 +12,7 @@ const Home = ()=>{
             <WeatherCard/>
             <TimeCard/>
             <CriptoCard/>
+            <PlaylistCard/>
         </MainContainer>
     )
 }

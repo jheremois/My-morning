@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import MyDayRoutes from '@src/screens/myDay/MyDay.routes';
-import { Tasks } from '@src/screens/Tasks';
+import TasksRoutes from '@src/screens/Tasks/Tasks.routes';
 
 const icons: any = ["partly-sunny-sharp", "ios-add-circle-sharp"];
 const getTemplateIcon = (focused: boolean, pos: number) => {
@@ -16,8 +16,8 @@ const setIcons = (iconsPost: number) => {
     };
 };
 
-// 
 const Tap = createBottomTabNavigator()
+
 function MainRoutes() {
     return (
       <NavigationContainer>
@@ -34,7 +34,7 @@ function MainRoutes() {
             }}
           >
               <Tap.Screen name="My day" component={MyDayRoutes} options={setIcons(0)} />
-              <Tap.Screen name="Tasks" component={Tasks} options={setIcons(1)} />
+              <Tap.Screen name="Tasks" component={TasksRoutes} options={setIcons(1)} />
           </Tap.Navigator>
       </NavigationContainer>
     )

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Linking } from "react-native";
 import styles from "./styles";
 import Card from "../Card";
 import { monthName, weekday} from "@src/models/models";
 const date = new Date();
 
 
-const TimeCard = ({navigation}: any)=>{
+const TimeCard = ()=>{
 
     const [loading, setLoading] = useState(false)
     const [dateTime, setDateTime] = useState({
@@ -49,7 +49,7 @@ const TimeCard = ({navigation}: any)=>{
     }, [])  
 
     return(
-        <Card bg={['#3B5F4190', '#66A96B80']} load={loading} loadbg={'#ffffff90'} icon={'time'} action={(e: any)=> console.log(e)}>
+        <Card bg={['#3B5F4190', '#66A96B80']} load={loading} loadbg={'#ffffff90'} icon={'time'} action={()=> Linking.openURL(`https://acortar.link/THVgB1`)}>
             <View style={styles.cardIn}>
                 <View style={styles.time}>
                     <Text style={styles.timeText}>

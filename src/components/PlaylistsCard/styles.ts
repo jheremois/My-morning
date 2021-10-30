@@ -8,33 +8,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    crypCard: {
-        height: 190,
-        width: 130,
-        padding: 20,
-        backgroundColor: '#181a20',
-        borderRadius: 10,
+    plCard: {
+        borderRadius: 2,
+        padding: 10,
+        height: 215,
+        width: 160,
+        backgroundColor: '#18181880',
         margin: 5,
+        marginHorizontal: 10,
     },
-    crypCardimgCont: {
+    plCardimgCont: {
         paddingBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    crypCardimg: {
-        borderRadius: 90,
-        height: 80,
-        width: 80,
+    plCardimg: {
+        height: 140,
+        width: 140,
     },
-    crypCardText: {
+    plCardText: {
+        overflow: 'scroll',
+        paddingHorizontal: 10,
         fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#fff',
-    },
-    crypCardTextPrice: {
-        marginTop: 3,
-        textAlign: 'center',
-        color: '#fcd535',
+        color: '#fdfdfc',
     }
     
 });

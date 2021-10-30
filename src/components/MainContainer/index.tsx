@@ -6,7 +6,7 @@ const MainContainer = ({children}: any)=>{
 
     return(
         <ScrollView 
-            style={{ flex: 1, paddingHorizontal: 20, backgroundColor: '#212121'}}
+            style={{ flex: 1, paddingHorizontal: 20, marginBottom: 55,  backgroundColor: '#212121'}}
         >
             {children}
         </ScrollView>
